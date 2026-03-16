@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茶马古道·春茶之旅 2026</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: "Microsoft YaHei", "SimHei", sans-serif; 
+            background: #F5F0E8; 
+            padding: 15px 12px;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .page { max-width: 100%; margin: 0 auto; }
+        
+        /* 头部 */
+        .hdr {
+            text-align: center;
+            padding: 18px;
+            background: linear-gradient(135deg, #3D2B1F, #7A5C3A, #3D2B1F);
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .hdr h1 { font-size: 22px; letter-spacing: 2px; margin-bottom: 5px; }
+        .hdr p { font-size: 13px; opacity: 0.85; }
+        
+        /* 统计 */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat .n { font-size: 18px; font-weight: bold; color: #F0C060; }
+        .stat .l { font-size: 11px; opacity: 0.8; }
+        
+        /* 卡片 */
+        .card {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .card.tea { border-left: 5px solid #D4A017; }
+        .card.road { border-left: 5px solid #4A90D9; }
+        .card.rest { border-left: 5px solid #27AE60; }
+        
+        .card-header {
+            padding: 12px 15px;
+            background: #F8F4EE;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .day { font-size: 20px; font-weight: bold; color: #3D2B1F; }
+        .date { font-size: 12px; color: #888; }
+        .tag {
+            font-size: 10px;
+            background: #FFF8E0;
+            color: #D4A017;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .tag.blue { color: #2255AA; background: #E8F0FF; }
+        
+        .card-body { padding: 12px 15px; }
+        .title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .km { 
+            font-size: 11px;
+            background: #E8F0FF;
+            color: #2255AA;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .weather {
+            font-size: 11px;
+            background: #E8F8E8;
+            color: #1A7A3A;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+        
+        .route {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: #F0F4FF;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #2255AA;
+        }
+        .route b { color: #1a3a8a; }
+        
+        .cols { display: flex; gap: 15px; flex-wrap: wrap; }
+        .col { flex: 1; min-width: 45%; }
+        .col-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #999;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #EEE;
+        }
+        
+        .items { list-style: none; }
+        .items li {
+            font-size: 12px;
+            color: #444;
+            padding: 4px 0;
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+        }
+        .items li:before {
+            content: "•";
+            color: #D4A017;
+            font-weight: bold;
+        }
+        
+        .hotel {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: #FFF8E0;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #7A5C3A;
+        }
+        .hotel strong { color: #8B6914; }
+        
+        .tip {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: #FFF0F0;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #A03030;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: linear-gradient(135deg, #2C5F2E, #4A9E4C);
+            color: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer h3 { font-size: 16px; margin-bottom: 10px; }
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .contact-item .number { font-size: 18px; font-weight: bold; color: #A0F0A0; }
+        .contact-item .label { font-size: 11px; opacity: 0.85; }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .hdr h1 { font-size: 20px; }
+            .stats { gap: 15px; }
+            .stat .n { font-size: 16px; }
+            .col { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        
+        <!-- 头部 -->
+        <div class="hdr">
+            <h1>🍵 茶马古道·春茶之旅</h1>
+            <p>峨眉山市 → 云南茶山 → 昆明 · 2026年3月28日出发</p>
+            <div class="stats">
+                <div class="stat"><div class="n">12</div><div class="l">天</div></div>
+                <div class="stat"><div class="n">11</div><div class="l">晚</div></div>
+                <div class="stat"><div class="n">≈2,450</div><div class="l">公里</div></div>
+                <div class="stat"><div class="n">5</div><div class="l">核心茶山</div></div>
+            </div>
+        </div>
+        
+        <!-- 第1天 -->
+        <div class="card tea">
+            <div class="card-header">
+                <div class="day">D1</div>
+                <div class="date">3月28日 · 周五</div>
+                <div class="tag">集合日</div>
+            </div>
+            <div class="card-body">
+                <div class="title">
+                    <span>峨眉山市集合</span>
+                    <span class="km">0 km</span>
+                    <span class="weather">晴 15-22°C</span>
+                </div>
+                <div class="route"><b>行程：</b>全天峨眉山市指定酒店集合</div>
+                
+                <div class="cols">
+                    <div class="col">
+                        <div class="col-title">🏨 住宿安排</div>
+                        <div class="hotel">
+                            <strong>峨眉山温泉酒店</strong><br>
+                            地址：峨眉山市景区路XX号<br>
+                            电话：0833-XXXXXXX
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="col-title">📋 注意事项</div>
+                        <ul class="items">
+                            <li>请于18:00前抵达酒店</li>
+                            <li>晚上19:30行前说明会</li>
+                            <li>领取行程资料包</li>
+                            <li>检查装备准备情况</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    💡 提示：建议提前1天抵达，可自行游览峨眉山
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第2天 -->
+        <div class="card road">
+            <div class="card-header">
+                <div class="day">D2</div>
+                <div class="date">3月29日 · 周六</div>
+                <div class="tag blue">行车日</div>
+            </div>
+            <div class="card-body">
+                <div class="title">
+                    <span>峨眉山 → 乐山 → 宜宾</span>
+                    <span class="km">280 km</span>
+                    <span class="weather">多云 16-24°C</span>
+                </div>
+                <div class="route">
+                    <b>路线：</b>峨眉山 → G93成渝环线 → 乐山 → G85银昆高速 → 宜宾
+                </div>
+                
+                <div class="cols">
+                    <div class="col">
+                        <div class="col-title">🍵 茶文化体验</div>
+                        <ul class="items">
+                            <li>上午：乐山竹叶青茶园参观</li>
+                            <li>学习春茶采摘技巧</li>
+                            <li>体验手工炒茶工艺</li>
+                            <li>品鉴明前竹叶青</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="col-title">⛰️ 景点游览</div>
+                        <ul class="items">
+                            <li>乐山大佛远观</li>
+                            <li>岷江茶马古道起点</li>
+                            <li>宜宾五粮液酒文化</li>
+                            <li>长江第一城夜景</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="hotel">
+                    <strong>宜宾长江宾馆</strong><br>
+                    江景房，可欣赏长江夜景
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第3天 -->
+        <div class="card road">
+            <div class="card-header">
+                <div class="day">D3</div>
+                <div class="date">3月30日 · 周日</div>
+                <div class="tag blue">行车日</div>
+            </div>
+            <div class="card-body">
+                <div class="title">
+                    <span>宜宾 → 昭通 → 昆明</span>
+                    <span class="km">420 km</span>
+                    <span class="weather">晴 18-26°C</span>
+                </div>
+                <div class="route">
+                    <b>路线：</b>宜宾 → G85银昆高速 → 昭通 → 昆明
+                </div>
+                
+                <div class="cols">
+                    <div class="col">
+                        <div class="col-title">🌄 沿途风光</div>
+                        <ul class="items">
+                            <li>穿越乌蒙山区</li>
+                            <li>金沙江大峡谷</li>
+                            <li>昭通苹果之乡</li>
+                            <li>进入云南高原</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="col-title">📚 文化学习</div>
+                        <ul class="items">
+                            <li>茶马古道历史讲解</li>
+                            <li>云南少数民族文化</li>
+                            <li>普洱茶基础知识</li>
+                            <li>行程安全注意事项</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    💡 提示：海拔逐渐升高，注意适应高原反应
+                </div>
+            </div>
+        </div>
+        
+        <!-- 更多天数... 这里简化显示 -->
+        <div class="card tea">
+            <div class="card-header">
+                <div class="day">D4-D11</div>
+                <div class="date">3月31日-4月7日</div>
+                <div class="tag">茶山深度游</div>
+            </div>
+            <div class="card-body">
+                <div class="title">云南五大茶山深度体验</div>
+                <div class="cols">
+                    <div class="col">
+                        <div class="col-title">🍃 核心茶山</div>
+                        <ul class="items">
+                            <li>勐海茶山 - 老班章</li>
+                            <li>易武茶山 - 薄荷塘</li>
+                            <li>景迈茶山 - 千年古茶园</li>
+                            <li>布朗茶山 - 老曼峨</li>
+                            <li>南糯茶山 - 半坡老寨</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="col-title">🎯 体验内容</div>
+                        <ul class="items">
+                            <li>古树茶采摘体验</li>
+                            <li>传统石磨压饼</li>
+                            <li>茶农家访交流</li>
+                            <li>茶山徒步探险</li>
+                            <li>茶文化专题讲座</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <h3>📞 联系我们</h3>
+            <p>李青忆 · 二十余年资深茶人</p>
+            <div class="contact">
+                <div class="contact-item">
+                    <div class="number">微信</div>
+                    <div class="label">扫码添加咨询</div>
+                </div>
+                <div class="contact-item">
+                    <div class="number">电话</div>
+                    <div class="label">138-XXXX-XXXX</div>
+                </div>
+                <div class="contact-item">
+                    <div class="number">邮箱</div>
+                    <div class="label">qingyi@tea.com</div>
+                </div>
+            </div>
+            <p style="margin-top: 15px; font-size: 12px; opacity: 0.9;">
+                🍵 专业茶文化之旅 · 🌿 深度茶山体验 · 🗺️ 茶马古道探索
+            </p>
+        </div>
+        
+    </div>
+    
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 点击卡片展开/收起详情（简化版）
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+            
+            // 显示当前日期
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            // document.getElementById('current-date').textContent = now.toLocaleDateString('zh-CN', options);
+        });
+    </script>
+</body>
+</html>
