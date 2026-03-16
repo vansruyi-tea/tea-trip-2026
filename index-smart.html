@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茶马古道·春茶之旅 2026 - 智能版</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: #F5F0E8;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 28px;
+            color: #3D2B1F;
+            margin-bottom: 10px;
+        }
+        .logo span {
+            color: #7A5C3A;
+        }
+        h1 {
+            color: #3D2B1F;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        .desc {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .device-info {
+            background: #F8F4EE;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #D4A017;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 14px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-mobile {
+            background: linear-gradient(135deg, #3D2B1F, #7A5C3A);
+            color: white;
+        }
+        .btn-mobile:hover {
+            background: linear-gradient(135deg, #4D3B2F, #8A6C4A);
+            transform: translateY(-2px);
+        }
+        .btn-desktop {
+            background: #F0F4FF;
+            color: #2255AA;
+            border: 2px solid #2255AA;
+        }
+        .btn-desktop:hover {
+            background: #E8F0FF;
+            transform: translateY(-2px);
+        }
+        .icon {
+            font-size: 20px;
+        }
+        .tip {
+            margin-top: 25px;
+            padding: 12px;
+            background: #FFF8E0;
+            border-radius: 8px;
+            color: #7A5C3A;
+            font-size: 14px;
+            border-left: 3px solid #D4A017;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 13px;
+        }
+    </style>
+    <script>
+        // 检测设备类型
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
+        // 页面加载时自动跳转
+        window.onload = function() {
+            const isAutoRedirect = true; // 设置为true启用自动跳转
+            
+            if (isAutoRedirect) {
+                if (isMobile()) {
+                    // 手机设备跳转到手机版
+                    window.location.href = "mobile-optimized.html";
+                } else {
+                    // 电脑设备跳转到桌面版
+                    window.location.href = "index.html";
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🍵 <span>茶马古道</span> · 春茶之旅</div>
+        <h1>2026年春季茶禅之旅</h1>
+        
+        <div class="desc">
+            峨眉山市 → 云南茶山 → 昆明<br>
+            12天深度茶文化体验之旅
+        </div>
+        
+        <div class="device-info" id="deviceInfo">
+            <!-- 设备信息由JavaScript动态填充 -->
+        </div>
+        
+        <div class="buttons">
+            <a href="mobile-optimized.html" class="btn btn-mobile">
+                <span class="icon">📱</span>
+                <span>手机优化版</span>
+            </a>
+            
+            <a href="index.html" class="btn btn-desktop">
+                <span class="icon">💻</span>
+                <span>桌面完整版</span>
+            </a>
+        </div>
+        
+        <div class="tip">
+            💡 提示：页面已根据您的设备自动推荐最适合的版本
+        </div>
+        
+        <div class="footer">
+            青忆的茶禅之旅 · 2026年3月28日出发
+        </div>
+    </div>
+    
+    <script>
+        // 显示设备信息
+        const deviceInfo = document.getElementById('deviceInfo');
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobileDevice) {
+            deviceInfo.innerHTML = `
+                <strong>📱 检测到移动设备</strong><br>
+                <small>推荐使用"手机优化版"获得最佳体验</small>
+            `;
+        } else {
+            deviceInfo.innerHTML = `
+                <strong>💻 检测到桌面设备</strong><br>
+                <small>推荐使用"桌面完整版"查看完整地图和行程</small>
+            `;
+        }
+    </script>
+</body>
+</html>
